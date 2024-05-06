@@ -23,7 +23,7 @@ const editorConfig = {
   theme: ExampleTheme,
 };
 
-export default function Editor({isEditable}: {isEditable: boolean;}) {
+export default function Editor({ isEditable }: { isEditable: boolean; }) {
   const editorRef = useRef<LexicalEditor | null>(null);
 
   useEffect(() => {
@@ -38,6 +38,12 @@ export default function Editor({isEditable}: {isEditable: boolean;}) {
         editable: isEditable,
         editorState: (editor) => {
           editorRef.current = editor;
+          editor.registerEditableListener((currentIsEditable) => {
+            console.log(
+              'initialConfig editable listener isEditable ',
+              currentIsEditable,
+            );
+          });
         },
       }}
     >
