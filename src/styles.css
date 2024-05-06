@@ -79,7 +79,7 @@ h1 {
   position: absolute;
   text-overflow: ellipsis;
   top: 15px;
-  left: 10px;
+  left: 15px;
   font-size: 15px;
   user-select: none;
   display: inline-block;
