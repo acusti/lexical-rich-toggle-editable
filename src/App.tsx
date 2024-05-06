@@ -1,34 +1,32 @@
-// STILL TO TEST
-// [ ] onChange handler
-// [ ] remix
-// [ ] CSS transform scale?
-import { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense, useCallback, useState } from 'react';
 
 const Editor = lazy(() => import('./Editor.jsx'));
 
-const EDITORS = Array(4).fill(null);
-
 export default function App() {
-  const [activeEditorIndex, setActiveEditorIndex] =
-    useState(0);
+  // NOTE Defaulting this to true makes the editor work,
+  // though then contenteditable="true" will never become "false".
+  // More specifically, the ContentEditable registered editableListener never fires:
+  // https://github.com/facebook/lexical/blob/main/packages/lexical-react/src/LexicalContentEditable.tsx#L71
+  const [isEditable, setIsEditable] = useState(false);
+  const enableEditable = useCallback(() => setIsEditable(true), []);
+  const disableEditable = useCallback(() => setIsEditable(false), []);
 
-  return EDITORS.map((_, index) => {
-    const isEditable = activeEditorIndex === index;
-    return (
-      <section key={`editor-${index}`}>
-        <p>
+  return (
+    <section>
+      <p>
+        <button disabled={!isEditable} onClick={disableEditable}>
           {isEditable
-            ? 'Editing Enabled'
+            ? 'Disable Editing'
             : 'Editing Disabled (Click editor to enable)'}
-        </p>
-        <div onClick={() => setActiveEditorIndex(index)}>
-          <Suspense fallback={<Loader />}>
-            <Editor isEditable={isEditable} />
-          </Suspense>
-        </div>
-      </section>
-    );
-  });
+        </button>
+      </p>
+      <div onClick={enableEditable}>
+        <Suspense fallback={<Loader />}>
+          <Editor isEditable={isEditable} />
+        </Suspense>
+      </div>
+    </section>
+  );
 }
 
 function Loader() {
