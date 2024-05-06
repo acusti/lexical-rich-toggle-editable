@@ -1,0 +1,24 @@
+{
+  "name": "@lexical/react-rich-example",
+  "private": true,
+  "version": "0.14.5",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@lexical/react": "0.14.5",
+    "lexical": "0.14.5",
+    "react": "https://react-builds.vercel.app/api/commits/29b66a538dfca92616c145c811f810ca2987ae29/packages/react",
+    "react-dom": "https://react-builds.vercel.app/api/commits/29b66a538dfca92616c145c811f810ca2987ae29/packages/react-dom"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.59",
+    "@types/react-dom": "^18.2.19",
+    "@vitejs/plugin-react": "^4.2.1",
+    "typescript": "^5.2.2",
+    "vite": "^5.1.4"
+  }
+}
