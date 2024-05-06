@@ -11,8 +11,8 @@
   "dependencies": {
     "@lexical/react": "0.14.5",
     "lexical": "0.14.5",
-    "react": "https://react-builds.vercel.app/api/commits/29b66a538dfca92616c145c811f810ca2987ae29/packages/react",
-    "react-dom": "https://react-builds.vercel.app/api/commits/29b66a538dfca92616c145c811f810ca2987ae29/packages/react-dom"
+    "react": "19.0.0-beta-1beb73de0f-20240503",
+    "react-dom": "19.0.0-beta-1beb73de0f-20240503"
   },
   "devDependencies": {
     "@types/react": "^18.2.59",
