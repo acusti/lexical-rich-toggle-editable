@@ -27,17 +27,8 @@ export default function Editor({isEditable}: {isEditable: boolean;}) {
   const editorRef = useRef<LexicalEditor | null>(null);
 
   useEffect(() => {
-    const editor = editorRef.current;
-    if (!editor) return;
-    if (!isEditable) {
-      editor.setEditable(false);
-      return;
-    }
-
-    editor.setEditable(isEditable);
-    setTimeout(() => {
-      editor.focus();
-    }, 1); // next tick
+    editorRef.current?.setEditable(isEditable);
+    console.log('isEditable', isEditable, 'editor', editorRef.current);
   }, [isEditable]);
 
   return (
