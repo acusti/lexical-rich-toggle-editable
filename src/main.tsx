@@ -11,15 +11,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 import App from './App.tsx';
-import { ActiveEditorProvider } from './utils/ActiveEditorContext.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <div className="App">
       <h1>Lexical React Rich Text Toggle Editable Example</h1>
-      <ActiveEditorProvider>
-        <App />
-      </ActiveEditorProvider>
+      <App />
     </div>
   </React.StrictMode>
 );

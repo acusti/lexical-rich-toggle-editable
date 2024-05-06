@@ -2,25 +2,20 @@
 // [ ] onChange handler
 // [ ] remix
 // [ ] CSS transform scale?
-import { lazy, Suspense, useContext } from 'react';
-
-import { ActiveEditorContext } from './utils/ActiveEditorContext.jsx';
-import EDITOR_CONTENTS from './constants/editor-contents.js';
+import { lazy, Suspense, useState } from 'react';
 
 const Editor = lazy(() => import('./Editor.jsx'));
 
-export default function App() {
-  const { activeEditorIndex, setActiveEditorIndex } =
-    useContext(ActiveEditorContext);
+const EDITORS = Array(4).fill(null);
 
-  return EDITOR_CONTENTS.map((text, index) => {
+export default function App() {
+  const [activeEditorIndex, setActiveEditorIndex] =
+    useState(0);
+
+  return EDITORS.map((_, index) => {
     const isEditable = activeEditorIndex === index;
-    const isInline = index % 2 === 1;
     return (
-      <section
-        className={isInline ? 'inline-editor' : ''}
-        key={`editor-${index}`}
-      >
+      <section key={`editor-${index}`}>
         <p>
           {isEditable
             ? 'Editing Enabled'
@@ -28,7 +23,7 @@ export default function App() {
         </p>
         <div onClick={() => setActiveEditorIndex(index)}>
           <Suspense fallback={<Loader />}>
-            <Editor isEditable={isEditable} isInline={isInline} text={text} />
+            <Editor isEditable={isEditable} />
           </Suspense>
         </div>
       </section>
