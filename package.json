@@ -20,5 +20,8 @@
     "@vitejs/plugin-react": "^4.2.1",
     "typescript": "^5.2.2",
     "vite": "^5.1.4"
+  },
+  "stackblitz": {
+    "startCommand": "npm install --legacy-peer-deps && npm run dev"
   }
 }
