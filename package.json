@@ -22,6 +22,7 @@
     "vite": "^5.1.4"
   },
   "stackblitz": {
+    "installDependencies": false,
     "startCommand": "npm install --legacy-peer-deps && npm run dev"
   }
 }
