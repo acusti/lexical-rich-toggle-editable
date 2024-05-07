@@ -8,11 +8,12 @@ export default function EditablePlugin({ isEditable }: { isEditable: boolean }) 
     useEffect(() =>
         editor.registerEditableListener((_isEditable) => {
             if (_isEditable) {
-                // editor.focus(); // also tried focussing here with no luck
-                editor.update(() => {
+                setTimeout(() => {
                     editor.focus();
-                    $selectAll();
-                });
+                    editor.update(() => {
+                        $selectAll();
+                    });
+                }, 0); // next tick
             }
         }),
         [editor],
@@ -20,15 +21,6 @@ export default function EditablePlugin({ isEditable }: { isEditable: boolean }) 
 
     useEffect(() => {
         editor.setEditable(isEditable);
-        /* I first tried to focus from here, but it didn’t work, so I tried the listener
-        if (isEditable) {
-            // editor.focus(); // also tried focussing here with no luck
-            editor.update(() => {
-                editor.focus();
-                $selectAll();
-            });
-        }
-        */
     }, [editor, isEditable]);
 
     return null;
