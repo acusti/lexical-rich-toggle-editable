@@ -3,9 +3,8 @@ import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
-import type { LexicalEditor } from 'lexical';
-import { useEffect, useRef } from 'react';
 
+import EditablePlugin from './EditablePlugin.js';
 import ExampleTheme from './ExampleTheme.js';
 
 function Placeholder() {
@@ -24,27 +23,11 @@ const editorConfig = {
 };
 
 export default function Editor({ isEditable }: { isEditable: boolean; }) {
-  const editorRef = useRef<LexicalEditor | null>(null);
-
-  useEffect(() => {
-    editorRef.current?.setEditable(isEditable);
-    console.log('isEditable', isEditable, 'editor', editorRef.current);
-  }, [isEditable]);
-
   return (
     <LexicalComposer
       initialConfig={{
         ...editorConfig,
         editable: isEditable,
-        editorState: (editor) => {
-          editorRef.current = editor;
-          editor.registerEditableListener((currentIsEditable) => {
-            console.log(
-              'initialConfig editable listener isEditable ',
-              currentIsEditable,
-            );
-          });
-        },
       }}
     >
       <div className="editor-container">
@@ -55,6 +38,7 @@ export default function Editor({ isEditable }: { isEditable: boolean; }) {
             ErrorBoundary={LexicalErrorBoundary}
           />
           <HistoryPlugin />
+          <EditablePlugin isEditable={isEditable} />
         </div>
       </div>
     </LexicalComposer>
